@@ -19,24 +19,13 @@
     <h1>Dashboard</h1>
 
     <div>
-      <span>Welcome, <%= user.username %> 👋</span>
+      <span>Welcome, <%= user.username %></span>
       <a href="/logout" class="btn">Logout</a>
     </div>
   </nav>
 
   <main class="dashboard">
 
-    <!-- <section class="overview">
-      <div class="overview-card">
-        <h3>Latest News</h3>
-        <p>Fresh headlines loaded automatically.</p>
-      </div>
-
-      <div class="overview-card">
-        <h3>Weather Forecast</h3>
-        <p>Current weather for Lagos by default.</p>
-      </div>
-    </section> -->
 
     <section class="section-box">
       <div class="section-header">
@@ -56,6 +45,7 @@
       </div>
     </section>
 
+    
 
  
     <section class="section-box">
@@ -71,7 +61,7 @@
         <button onclick="loadWeather()">Search Weather</button>
       </div>
 
-      <div id="weatherContainer" class="weather-card">
+      <div id="weatherContainer">
         <p>Loading weather...</p>
       </div>
     </section>
