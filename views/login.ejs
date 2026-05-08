@@ -2,74 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
-
-  <!-- added small style for input + eye -->
-  <style>
-    .password-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .password-wrapper input {
-      width: 100%;
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      user-select: none;
-      color: #666;
-    }
-
-    .toggle-password:hover {
-      color: #000;
-    }
-  </style>
-</head>
+  <title>Login</title>
 <body>
 
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
   <% if (success && success.length > 0) { %>
-  <div class="toast success"><%= success[0] %></div>
-<% } %>
+    <div class="toast success"><%= success[0] %></div>
+  <% } %>
 
-<% if (error && error.length > 0) { %>
-  <div class="toast error"><%= error[0] %></div>
-<% } %>
+  <% if (error && error.length > 0) { %>
+    <div class="toast error"><%= error[0] %></div>
+  <% } %>
 
-  <div class="form-container">
-    <form action="/login" method="POST">
-      <h2>Login</h2>
+  <main class="auth-page">
+    <section class="auth-text">
+      <h1>Welcome Back to <span>Your Dashboard</span></h1>
+      <p>
+        Login to access your personalized dashboard, latest news updates,
+        and real-time weather reports in one clean workspace.
+      </p>
+    </section>
 
-      <input type="email" name="email" placeholder="Email" required>
+    <section class="auth-card">
+      <form action="/login" method="POST">
+        <h2>Login</h2>
+        <p class="subtitle">Enter your details to continue</p>
+        <a href="/" class="back-home">← Back to Home</a>
 
-      <!-- PASSWORD FIELD WITH EYE ICON -->
-      <div class="password-wrapper">
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <span class="toggle-password" onclick="togglePassword()">👁</span>
-      </div>
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        </div>
 
-      <button type="submit">Login</button>
+        <div class="input-group">
+          <label for="password">Password</label>
 
-      <p>Don't have an account? <a href="/register">Register</a></p>
-    </form>
-  </div>
+          <div class="password-wrapper">
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
+          </div>
+        </div>
+
+        <button type="submit" class="auth-btn">Login</button>
+
+        <p class="auth-footer">
+          Don't have an account?
+          <a href="/register">Register</a>
+        </p>
+      </form>
+    </section>
+  </main>
 
   <script>
     function togglePassword() {
       const input = document.getElementById("password");
       input.type = input.type === "password" ? "text" : "password";
     }
+
+    const toast = document.querySelector(".toast");
+
+    if (toast) {
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(100%)";
+
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 3000);
+    }
   </script>
 
 </body>
 </html>
-
 
 
 

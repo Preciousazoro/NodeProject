@@ -2,52 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
-<body>
+<body class="landing-body">
 
-  <!-- Navbar -->
-  <nav class="navbar">
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <nav class="landing-navbar">
     <h1 class="logo">MyApp</h1>
+
     <div class="nav-buttons">
-      <a href="/login" class="btn">Login</a>
-      <a href="/register" class="btn primary">Register</a>
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-btn">Register</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Welcome to MyApp 🚀</h2>
-    <p>Your all-in-one platform to manage tasks and grow.</p>
+  <main class="landing-page">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="badge">News • Weather • Dashboard</span>
 
-    <div class="hero-buttons">
-      <a href="/register" class="btn primary">Get Started</a>
-      <a href="/login" class="btn">Login</a>
-    </div>
-  </section>
+        <h2>Welcome to <span>MyApp</span></h2>
 
-  <!-- Features Section -->
-  <section class="features">
-    <h2>Features</h2>
-    <div class="feature-container">
-      <div class="card">
-        <h3>⚡ Fast</h3>
-        <p>Lightning-fast performance with Node.js backend.</p>
-      </div>
-      <div class="card">
-        <h3>🔒 Secure</h3>
-        <p>Your data is protected with strong authentication.</p>
-      </div>
-      <div class="card">
-        <h3>📱 Responsive</h3>
-        <p>Works perfectly on mobile, tablet, and desktop.</p>
-      </div>
-    </div>
-  </section>
+        <p>
+          Your clean all-in-one platform for checking latest news,
+          viewing real-time weather, and managing your dashboard easily.
+        </p>
 
-  <!-- Footer -->
-  <footer>
+        <div class="hero-buttons">
+          <a href="/register" class="primary-btn">Get Started</a>
+          <a href="/login" class="secondary-btn">Login</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="mini-card">
+          <h3>Latest News</h3>
+          <p>Stay updated with fresh headlines.</p>
+        </div>
+
+        <div class="mini-card active">
+          <h3>Weather Report</h3>
+          <p>Search any city and view live forecast.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>Secure Access</h3>
+          <p>Protected login and registration flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Why Use MyApp?</h2>
+      <p class="section-subtitle">Simple, fast, responsive, and easy to use.</p>
+
+      <div class="feature-container">
+        <div class="feature-card">
+          <h3>⚡ Fast</h3>
+          <p>Built with Node.js for quick loading and smooth user experience.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🔒 Secure</h3>
+          <p>User authentication keeps your account and dashboard protected.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>📱 Responsive</h3>
+          <p>Looks clean on mobile, tablet, laptop, and desktop screens.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
     <p>© 2026 MyApp. All rights reserved.</p>
   </footer>
 
