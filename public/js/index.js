@@ -49,43 +49,63 @@
   }
 
   // WEATHER
-  async function loadWeather() {
-    const city = document.getElementById("weatherSearch").value || "Lagos";
-    const box = document.getElementById("weatherContainer");
+async function loadWeather(city = "Lagos") {
+  const res = await fetch(`/api/weather?city=${city}`);
+  const data = await res.json();
 
-    box.innerHTML = "<p>Loading weather...</p>";
+  const current = data.current;
 
-    try {
-      const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
-      const data = await res.json();
+  document.getElementById("cityName").textContent =
+    `Forecast in ${current.name}, ${current.sys.country}`;
 
-      if (data.error) {
-        box.innerHTML = `<p>${data.error}</p>`;
-        return;
-      }
+  document.getElementById("temperature").textContent =
+    `${Math.round(current.main.temp)}°C`;
 
-      box.innerHTML = `
-        <h2>${data.city}, ${data.country}</h2>
+  document.getElementById("condition").textContent =
+    current.weather[0].description;
 
-        <div class="forecast-grid">
-          ${(data.forecast || []).map(item => `
-            <div class="forecast-card">
-              <img src="https://openweathermap.org/img/wn/${item.icon}@2x.png">
-              <h3>${item.temp}°C</h3>
-              <p>${item.description}</p>
-              <small>${new Date(item.time).toLocaleString()}</small>
-              <p>💧 ${item.humidity}%</p>
-              <p>💨 ${item.wind} km/h</p>
-            </div>
-          `).join("")}
-        </div>
-      `;
+  document.getElementById("highLow").textContent =
+    `High ${Math.round(current.main.temp_max)}°C / Low ${Math.round(current.main.temp_min)}°C`;
 
-    } catch (error) {
-      console.log(error);
-      box.innerHTML = "<p>Failed to load weather.</p>";
-    }
-  }
+  document.getElementById("visibility").textContent =
+    `${current.visibility / 1000}km`;
 
-  loadNews();
+  document.getElementById("humidity").textContent =
+    `${current.main.humidity}%`;
+
+  document.getElementById("wind").textContent =
+    `${current.wind.speed} m/s`;
+
+  document.getElementById("sunrise").textContent =
+    new Date(current.sys.sunrise * 1000).toLocaleTimeString();
+
+  document.getElementById("sunset").textContent =
+    new Date(current.sys.sunset * 1000).toLocaleTimeString();
+
+  const forecastContainer = document.getElementById("forecastCards");
+  forecastContainer.innerHTML = "";
+
+  const daily = data.forecast.list.filter(item =>
+    item.dt_txt.includes("12:00:00")
+  );
+
+  daily.forEach(day => {
+    forecastContainer.innerHTML += `
+      <div class="forecast-card">
+        <h4>${new Date(day.dt * 1000).toLocaleDateString("en", { weekday: "short" })}</h4>
+        <img src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" width="60" />
+        <h3>${Math.round(day.main.temp)}°C</h3>
+        <p>${day.weather[0].description}</p>
+      </div>
+    `;
+  });
+}
+
+document.getElementById("weatherForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const city = document.getElementById("cityInput").value;
+  loadWeather(city);
+});
+
   loadWeather();
+  loadNews();

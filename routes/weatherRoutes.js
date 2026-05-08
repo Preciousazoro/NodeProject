@@ -1,40 +1,26 @@
+// routes/weatherRoute.js
 const express = require("express");
 const router = express.Router();
 
 router.get("/weather", async (req, res) => {
   const city = req.query.city || "Lagos";
+  const API_KEY = process.env.OPENWEATHER_API_KEY;
 
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&appid=${process.env.WEATHER_API_KEY}`
+    const currentRes = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
     );
 
-    const data = await response.json();
+    const forecastRes = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
+    );
 
-    if (data.cod !== "200") {
-      return res.status(404).json({
-        error: data.message || "City not found",
-      });
-    }
+    const current = await currentRes.json();
+    const forecast = await forecastRes.json();
 
-    const forecast = data.list.slice(0, 8).map(item => ({
-      time: item.dt_txt,
-      temp: item.main.temp,
-      humidity: item.main.humidity,
-      description: item.weather[0].description,
-      icon: item.weather[0].icon,
-      wind: item.wind.speed,
-    }));
-
-    res.json({
-      city: data.city.name,
-      country: data.city.country,
-      forecast,
-    });
-
+    res.json({ current, forecast });
   } catch (error) {
-    console.log("Weather API error:", error);
-    res.status(500).json({ error: "Failed to fetch weather" });
+    res.status(500).json({ message: "Failed to fetch weather" });
   }
 });
 
@@ -47,8 +33,12 @@ module.exports = router;
 
 
 
-// const express = require("express");
 
+
+
+
+
+// const express = require("express");
 // const router = express.Router();
 
 // router.get("/weather", async (req, res) => {
@@ -56,15 +46,35 @@ module.exports = router;
 
 //   try {
 //     const response = await fetch(
-//       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_KEY}&units=metric`
+//       `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&appid=${process.env.WEATHER_API_KEY}`
 //     );
 
 //     const data = await response.json();
 
-//     res.json(data);
+//     if (data.cod !== "200") {
+//       return res.status(404).json({
+//         error: data.message || "City not found",
+//       });
+//     }
+
+//     const forecast = data.list.slice(0, 8).map(item => ({
+//       time: item.dt_txt,
+//       temp: item.main.temp,
+//       humidity: item.main.humidity,
+//       description: item.weather[0].description,
+//       icon: item.weather[0].icon,
+//       wind: item.wind.speed,
+//     }));
+
+//     res.json({
+//       city: data.city.name,
+//       country: data.city.country,
+//       forecast,
+//     });
+
 //   } catch (error) {
-//     console.error(error);
-//     res.json({ error: "Weather not found" });
+//     console.log("Weather API error:", error);
+//     res.status(500).json({ error: "Failed to fetch weather" });
 //   }
 // });
 

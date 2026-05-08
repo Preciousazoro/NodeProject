@@ -285,7 +285,63 @@ a {
   max-width: none;
 }
 
-.forecast-grid {
+.weather-dashboard {
+  background: #252331;
+  min-height: 100vh;
+  color: white;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.main-weather-card,
+.weather-details,
+.sun-card,
+.forecast-card {
+  background: #303847;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.main-weather-card h1 {
+  font-size: 50px;
+}
+
+.weather-details {
+  background: #9bb8aa;
+  color: white;
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.forecast-card {
+  text-align: center;
+  background: #40576a;
+}
+
+#weatherForm {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+#cityInput {
+  padding: 10px;
+  width: 300px;
+}
+
+/* .forecast-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
@@ -308,7 +364,7 @@ a {
 .forecast-card h3 {
   font-size: 22px;
   margin: 8px 0;
-}
+} */
 
 
 /* INPUT ADDRESS */

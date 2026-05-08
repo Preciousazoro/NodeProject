@@ -4,6 +4,87 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- added small style for input + eye -->
+  <style>
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+      color: #666;
+    }
+
+    .toggle-password:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <% if (success && success.length > 0) { %>
+  <div class="toast success"><%= success[0] %></div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="toast error"><%= error[0] %></div>
+<% } %>
+
+  <div class="form-container">
+    <form action="/login" method="POST">
+      <h2>Login</h2>
+
+      <input type="email" name="email" placeholder="Email" required>
+
+      <!-- PASSWORD FIELD WITH EYE ICON -->
+      <div class="password-wrapper">
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <span class="toggle-password" onclick="togglePassword()">👁</span>
+      </div>
+
+      <button type="submit">Login</button>
+
+      <p>Don't have an account? <a href="/register">Register</a></p>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -31,4 +112,4 @@
   </div>
 
 </body>
-</html>
+</html> -->

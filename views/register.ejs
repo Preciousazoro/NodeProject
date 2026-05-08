@@ -4,6 +4,154 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- added minimal CSS for password eye -->
+  <style>
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+      color: #666;
+    }
+
+    .toggle-password:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <% if (success && success.length > 0) { %>
+  <div class="toast success"><%= success[0] %></div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="toast error"><%= error[0] %></div>
+<% } %>
+
+  <div class="form-container">
+    <form action="/register" method="POST" onsubmit="return validateForm()">
+      <h2>Create Account</h2>
+
+      <input type="text" name="username" placeholder="Username" required>
+
+      <input type="email" name="email" placeholder="Email" required>
+
+      <!-- PASSWORD -->
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+      </div>
+
+      <!-- CONFIRM PASSWORD -->
+      <div class="password-wrapper">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁</span>
+      </div>
+
+      <div class="address-wrapper">
+        <input
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Start typing your address..."
+          autocomplete="off"
+          required
+        />
+
+        <div id="suggestions" class="suggestions-box"></div>
+      </div>
+
+      <button type="submit">Register</button>
+
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </form>
+  </div>
+
+<script>
+  // password toggle (reusable)
+  function togglePassword(id) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+  }
+
+  const addressInput = document.getElementById("address");
+  const suggestionsBox = document.getElementById("suggestions");
+
+  addressInput.addEventListener("input", async function () {
+    const query = addressInput.value.trim();
+
+    if (query.length < 3) {
+      suggestionsBox.innerHTML = "";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
+      );
+
+      const data = await response.json();
+
+      suggestionsBox.innerHTML = "";
+
+      data.slice(0, 5).forEach((place) => {
+        const div = document.createElement("div");
+
+        div.classList.add("suggestion-item");
+        div.textContent = place.display_name;
+
+        div.addEventListener("click", () => {
+          addressInput.value = place.display_name;
+          suggestionsBox.innerHTML = "";
+        });
+
+        suggestionsBox.appendChild(div);
+      });
+    } catch (error) {
+      console.error("Address fetch error:", error);
+    }
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!document.querySelector(".address-wrapper").contains(e.target)) {
+      suggestionsBox.innerHTML = "";
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -98,4 +246,4 @@
 
 
 </body>
-</html>
+</html> -->

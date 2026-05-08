@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
 
@@ -56,14 +56,38 @@
         </div>
       </div>
 
-      <div class="search-box">
-        <input type="text" id="weatherSearch" placeholder="Enter city e.g Abuja, London">
-        <button onclick="loadWeather()">Search Weather</button>
-      </div>
 
-      <div id="weatherContainer">
-        <p>Loading weather...</p>
-      </div>
+              <div class="weather-dashboard">
+          <h2>Weather Dashboard</h2>
+
+          <form id="weatherForm">
+            <input type="text" id="cityInput" placeholder="Search City..." />
+            <button>Search</button>
+          </form>
+
+          <div class="weather-grid">
+            <section class="main-weather-card">
+              <h3 id="cityName">Forecast in Lagos</h3>
+              <h1 id="temperature">29°C</h1>
+              <p id="condition">Cloudy</p>
+              <p id="highLow">High 31°C / Low 25°C</p>
+            </section>
+
+            <section class="weather-details">
+              <p>Visibility: <span id="visibility"></span></p>
+              <p>Humidity: <span id="humidity"></span></p>
+              <p>Wind: <span id="wind"></span></p>
+            </section>
+
+            <section class="sun-card">
+              <p>Sunrise: <span id="sunrise"></span></p>
+              <p>Sunset: <span id="sunset"></span></p>
+            </section>
+          </div>
+
+          <div id="forecastCards" class="forecast-row"></div>
+        </div>
+
     </section>
 
   </main>
