@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link rel="stylesheet" href="/css/style.css">
   <title>Register</title>
 </head>
@@ -46,22 +47,48 @@
         </div>
 
         <div class="input-group">
-          <label for="password">Password</label>
+        <label for="password">Password</label>
 
-          <div class="password-wrapper">
-            <input type="password" id="password" name="password" placeholder="Enter password" required>
-            <span class="toggle-password" onclick="togglePassword('password')">👁</span>
-          </div>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            required
+          >
+
+          <button
+            type="button"
+            class="toggle-password"
+            onclick="togglePassword('password', 'eyeIcon1')"
+          >
+            <i class="fa-solid fa-eye" id="eyeIcon1"></i>
+          </button>
         </div>
+      </div>
 
-        <div class="input-group">
-          <label for="confirmPassword">Confirm Password</label>
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password</label>
 
-          <div class="password-wrapper">
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
-            <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁</span>
-          </div>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            required
+          >
+
+          <button
+            type="button"
+            class="toggle-password"
+            onclick="togglePassword('confirmPassword', 'eyeIcon2')"
+          >
+            <i class="fa-solid fa-eye" id="eyeIcon2"></i>
+          </button>
         </div>
+      </div>
 
         <div class="input-group">
           <label for="address">Address</label>
@@ -90,191 +117,26 @@
     </section>
   </main>
 
+
   <script>
-    function togglePassword(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === "password" ? "text" : "password";
+  function togglePassword(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.classList.remove("fa-eye");
+      icon.classList.add("fa-eye-slash");
+    } else {
+      input.type = "password";
+      icon.classList.remove("fa-eye-slash");
+      icon.classList.add("fa-eye");
     }
+  }
+</script>
 
-    function validateForm() {
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return false;
-      }
-
-      return true;
-    }
-
-    const toast = document.querySelector(".toast");
-
-    if (toast) {
-      setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateX(100%)";
-
-        setTimeout(() => {
-          toast.remove();
-        }, 300);
-      }, 3000);
-    }
-
-    const addressInput = document.getElementById("address");
-    const suggestionsBox = document.getElementById("suggestions");
-
-    addressInput.addEventListener("input", async function () {
-      const query = addressInput.value.trim();
-
-      if (query.length < 3) {
-        suggestionsBox.innerHTML = "";
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
-        );
-
-        const data = await response.json();
-
-        suggestionsBox.innerHTML = "";
-
-        data.slice(0, 5).forEach((place) => {
-          const div = document.createElement("div");
-
-          div.classList.add("suggestion-item");
-          div.textContent = place.display_name;
-
-          div.addEventListener("click", () => {
-            addressInput.value = place.display_name;
-            suggestionsBox.innerHTML = "";
-          });
-
-          suggestionsBox.appendChild(div);
-        });
-      } catch (error) {
-        console.error("Address fetch error:", error);
-      }
-    });
-
-    document.addEventListener("click", function (e) {
-      const addressWrapper = document.querySelector(".address-wrapper");
-
-      if (addressWrapper && !addressWrapper.contains(e.target)) {
-        suggestionsBox.innerHTML = "";
-      }
-    });
-  </script>
+  <script src="/js/register.js"></script>
 
 </body>
 </html>
 
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-
-
-  <% if (success && success.length > 0) { %>
-  <div class="toast success"><%= success[0] %></div>
-<% } %>
-
-<% if (error && error.length > 0) { %>
-  <div class="toast error"><%= error[0] %></div>
-<% } %>
-
-  <div class="form-container">
-    <form action="/register" method="POST" onsubmit="return validateForm()">
-      <h2>Create Account</h2>
-
-      <input type="text" name="username" placeholder="Username" required>
-
-      <input type="email" name="email" placeholder="Email" required>
-
-      <input type="password" id="password" name="password" placeholder="Password" required>
-
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-
-      <div class="address-wrapper">
-        <input
-          type="text"
-          id="address"
-          name="address"
-          placeholder="Start typing your address..."
-          autocomplete="off"
-          required
-        />
-
-        <div id="suggestions" class="suggestions-box"></div>
-      </div>
-      <button type="submit">Register</button>
-
-      <p>Already have an account? <a href="/login">Login</a></p>
-    </form>
-  </div>
-
-
-
-
-
-<script>
-  const addressInput = document.getElementById("address");
-  const suggestionsBox = document.getElementById("suggestions");
-
-  addressInput.addEventListener("input", async function () {
-    const query = addressInput.value.trim();
-
-    if (query.length < 3) {
-      suggestionsBox.innerHTML = "";
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
-      );
-
-      const data = await response.json();
-
-      suggestionsBox.innerHTML = "";
-
-      data.slice(0, 5).forEach((place) => {
-        const div = document.createElement("div");
-
-        div.classList.add("suggestion-item");
-        div.textContent = place.display_name;
-
-        div.addEventListener("click", () => {
-          addressInput.value = place.display_name;
-          suggestionsBox.innerHTML = "";
-        });
-
-        suggestionsBox.appendChild(div);
-      });
-    } catch (error) {
-      console.error("Address fetch error:", error);
-    }
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!document.querySelector(".address-wrapper").contains(e.target)) {
-      suggestionsBox.innerHTML = "";
-    }
-  });
-</script>
-
-
-</body>
-</html> -->

@@ -45,7 +45,6 @@
       </div>
     </section>
 
-    
 
  
     <section class="section-box">
@@ -57,7 +56,7 @@
       </div>
 
 
-              <div class="weather-dashboard">
+        <div class="weather-dashboard">
           <h2>Weather Dashboard</h2>
 
           <form id="weatherForm">
@@ -113,107 +112,3 @@
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-
-  <% if (success && success.length > 0) { %>
-  <div class="toast success"><%= success[0] %></div>
-<% } %>
-
-<% if (error && error.length > 0) { %>
-  <div class="toast error"><%= error[0] %></div>
-<% } %>
-
-  <nav class="navbar">
-    <h1>Dashboard</h1>
-    <a href="/login" class="btn">Logout</a>
-  </nav>
-
-  <section class="dashboard">
-    <h2>Welcome to your Dashboard</h2>
-
-    <div class="search-box">
-      <input type="text" id="newsSearch" placeholder="Search news...">
-      <button onclick="loadNews()">Search News</button>
-    </div>
-
-    <h2>Trending News</h2>
-    <div id="newsContainer" class="cards"></div>
-
-    <div class="search-box">
-      <input type="text" id="weatherSearch" placeholder="Enter city e.g Lagos">
-      <button onclick="loadWeather()">Search Weather</button>
-    </div>
-
-    <h2>Weather Report</h2>
-    <div id="weatherContainer" class="weather-card"></div>
-  </section>
-
-  <script>
-    async function loadNews() {
-      const search = document.getElementById("newsSearch").value || "trending";
-
-      const res = await fetch(`/api/news?search=${search}`);
-      const articles = await res.json();
-
-      const container = document.getElementById("newsContainer");
-      container.innerHTML = "";
-
-      if (articles.length === 0) {
-        container.innerHTML = "<p>No news found.</p>";
-        return;
-      }
-
-      articles.forEach(article => {
-        container.innerHTML += `
-          <div class="card">
-            <h3>${article.title}</h3>
-            <p>${article.description || "No description available"}</p>
-            <a href="${article.url}" target="_blank">Read more</a>
-          </div>
-        `;
-      });
-    }
-
-    async function loadWeather() {
-      const city = document.getElementById("weatherSearch").value || "Lagos";
-
-      const res = await fetch(`/api/weather?city=${city}`);
-      const weather = await res.json();
-
-      const container = document.getElementById("weatherContainer");
-
-      if (weather.cod === "404") {
-        container.innerHTML = "<p>City not found.</p>";
-        return;
-      }
-
-      container.innerHTML = `
-        <h3>${weather.name}</h3>
-        <p>Temperature: ${weather.main.temp}°C</p>
-        <p>Weather: ${weather.weather[0].description}</p>
-        <p>Humidity: ${weather.main.humidity}%</p>
-        <p>Wind Speed: ${weather.wind.speed} m/s</p>
-      `;
-    }
-
-    loadNews();
-    loadWeather();
-  </script>
-
-</body>
-</html> -->
