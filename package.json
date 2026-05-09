@@ -20,6 +20,7 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "livereload": "^0.10.3",
+    "mongoose": "^9.6.2",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
