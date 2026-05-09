@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 app.use(session({
-  secret: "mySecretKey",
+  secret: process.env.SESSION_SECRET || "fallbackSecret",
   resave: false,
   saveUninitialized: false
 }));
@@ -40,19 +40,30 @@ const pageRoutes = require("./routes/pageRoutes");
 const authRoutes = require("./routes/authRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
+const movieRoutes = require("./routes/movieRoutes");
+
 
 app.use("/", pageRoutes);
 app.use("/", authRoutes);
 app.use("/api", newsRoutes);
 app.use("/api", weatherRoutes);
+app.use("/api", movieRoutes);
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
 
+module.exports = app;
 
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
 
 
 

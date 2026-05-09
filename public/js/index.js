@@ -109,3 +109,49 @@ document.getElementById("weatherForm").addEventListener("submit", function(e) {
 
   loadWeather();
   loadNews();
+
+
+
+
+  // MOVIE
+  async function searchMovie(query = "Avengers") {
+    const container = document.getElementById("movieContainer");
+
+    try {
+      const response = await fetch(`/api/movies?search=${encodeURIComponent(query)}`);
+      const movies = await response.json();
+
+      if (!movies.length) {
+        container.innerHTML = "<p>No movies found.</p>";
+        return;
+      }
+
+      container.innerHTML = movies.map(movie => `
+        <div class="movie-card">
+          <img 
+            src="${movie.Poster !== "N/A" ? movie.Poster : "/images/no-poster.png"}" 
+            alt="${movie.Title}" 
+          />
+
+          <div class="movie-info">
+            <h3>${movie.Title}</h3>
+            <p><strong>Year:</strong> ${movie.Year}</p>
+            <p><strong>Type:</strong> ${movie.Type}</p>
+          </div>
+        </div>
+      `).join("");
+
+    } catch (error) {
+      container.innerHTML = "<p>Failed to load movies.</p>";
+      console.error(error);
+    }
+  }
+
+  document.getElementById("movieSearch").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      searchMovie(this.value);
+    }
+  });
+
+  searchMovie();
+
