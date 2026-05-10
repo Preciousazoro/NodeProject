@@ -1,6 +1,4 @@
-/* =========================
-   GLOBAL RESET
-========================= */
+/* GLOBAL RESET */
 * {
   box-sizing: border-box;
 }
@@ -30,9 +28,7 @@ body {
   overflow-x: hidden;
 }
 
-/* =========================
-   AUTH LAYOUT
-========================= */
+/* AUTH LAYOUT */
 .auth-page {
   width: 100%;
   max-width: 1150px;
@@ -59,9 +55,7 @@ body {
   font-size: 1rem;
 }
 
-/* =========================
-   AUTH CARD
-========================= */
+/* AUTH CARD */
 .auth-card {
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
@@ -81,9 +75,7 @@ body {
   color: var(--text-muted);
 }
 
-/* =========================
-   BACK HOME LINK
-========================= */
+/* BACK HOME LINK */
 .back-home {
   display: inline-flex;
   align-items: center;
@@ -101,9 +93,7 @@ body {
   transform: translateX(-3px);
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* INPUTS */
 .input-group {
   margin-bottom: 1rem;
 }
@@ -136,9 +126,7 @@ body {
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
 }
 
-/* =========================
-   PASSWORD
-========================= */
+/* PASSWORD */
 .password-wrapper,
 .address-wrapper {
   position: relative;
@@ -168,9 +156,7 @@ body {
   color: #6366f1;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 .auth-btn {
   width: 100%;
   margin-top: 0.5rem;
@@ -263,9 +249,7 @@ body {
   background: rgba(99, 102, 241, 0.18);
 }
 
-/* =========================
-   GLOW EFFECTS
-========================= */
+/* GLOW EFFECTS */
 .glow {
   position: fixed;
   width: 280px;
@@ -288,9 +272,7 @@ body {
   right: 10%;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+/* ANIMATIONS */
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -303,9 +285,7 @@ body {
   }
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .auth-page {
     grid-template-columns: 1fr;

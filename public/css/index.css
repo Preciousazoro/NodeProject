@@ -1,6 +1,4 @@
-/* =========================
-   GLOBAL RESET
-========================= */
+/* GLOBAL RESET */
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +9,8 @@
   --primary: #6366f1;
   --primary-hover: #4f46e5;
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+
   --card-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
   --text-main: #f8fafc;
@@ -26,9 +26,7 @@ body {
   position: relative;
 }
 
-/* =========================
-   GLOW EFFECTS
-========================= */
+/* GLOW EFFECTS */
 .glow {
   position: fixed;
   width: 280px;
@@ -51,9 +49,7 @@ body {
   right: 10%;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 .landing-navbar {
   width: 100%;
   padding: 1.2rem 5%;
@@ -106,9 +102,7 @@ body {
   opacity: 0.95;
 }
 
-/* =========================
-   MAIN PAGE
-========================= */
+/* MAIN PAGE */
 .landing-page {
   width: 100%;
   max-width: 1200px;
@@ -116,9 +110,7 @@ body {
   padding: 5rem 20px 3rem;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+/* HERO SECTION */
 .hero {
   min-height: 75vh;
   display: grid;
@@ -157,9 +149,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -197,9 +187,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* =========================
-   HERO SIDE CARD
-========================= */
+/* HERO SIDE CARD */
 .hero-card {
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
@@ -235,9 +223,7 @@ body {
   line-height: 1.5;
 }
 
-/* =========================
-   FEATURES
-========================= */
+/* FEATURES */
 .features {
   padding: 4rem 0 2rem;
   text-align: center;
@@ -283,9 +269,7 @@ body {
   line-height: 1.6;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 .landing-footer {
   text-align: center;
   padding: 2rem 20px;
@@ -294,9 +278,7 @@ body {
   background: rgba(15, 23, 42, 0.45);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 850px) {
   .hero {
     grid-template-columns: 1fr;
